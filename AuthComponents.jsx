@@ -2,7 +2,7 @@ import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useGoogleLogin } from '@react-oauth/google';
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "./AuthContext";
 
 export function AuthCard({ title, subtitle, children }) {
     return (
@@ -166,4 +166,5 @@ export function AuthDivider() {
             <div className="absolute left-1/2 -translate-x-1/2 w-12 h-6 bg-cyan-500/5 blur-xl rounded-full pointer-events-none -z-10"></div>
         </div>
     );
+
 }
