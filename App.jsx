@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import './index.css';
-import Dashboard from './components/Dashboard';
-import Signup from './pages/Signup';
-import Login from './pages/Login';
-import { AuthProvider, useAuth } from './context/AuthContext';
+import Dashboard from './Dashboard';
+import Signup from './Signup';
+import Login from './Login';
+import { AuthProvider, useAuth } from './AuthContext';
 
 const ProtectedRoute = ({ children }) => {
   const { user, loading } = useAuth();
