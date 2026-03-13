@@ -1,0 +1,272 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap');
+@import "tailwindcss";
+
+:root {
+  --bg-dark: #070B19;
+  --bg-card: rgba(16, 23, 41, 0.6);
+  --border-light: rgba(99, 130, 242, 0.15);
+
+  --accent-blue: #3A6BFF;
+  --accent-neon: #60A5FA;
+
+  --text-main: #FFFFFF;
+  --text-muted: #94A3B8;
+
+  --bullish: #10B981;
+  /* Green */
+  --bearish: #EF4444;
+  /* Red */
+
+  /* Layout constraints */
+  --panel-gap: 16px;
+  --card-radius: 6px;
+  --font-base: 'Inter', sans-serif;
+  --font-heading: 'Outfit', sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  font-family: var(--font-base);
+  min-height: 100vh;
+  background: radial-gradient(circle at top, #0A1332 0%, #070B19 100%);
+  display: flex;
+  justify-content: center;
+  overflow-x: hidden;
+}
+
+#root {
+  width: 100%;
+}
+
+/* Glassmorphism Card Utility */
+.glass-pane {
+  background: var(--bg-card);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--border-light);
+  border-radius: var(--card-radius);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.title-glow {
+  text-align: center;
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin: 8px 0;
+  color: #fff;
+  text-shadow: 0 0 15px rgba(96, 165, 250, 0.6);
+  position: relative;
+}
+
+/* Add subtle horizontal lines above and below title like the reference */
+.title-glow::before,
+.title-glow::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 30%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent-blue), transparent);
+}
+
+.title-glow::before {
+  left: 0;
+}
+
+.title-glow::after {
+  right: 0;
+}
+
+.subtitle {
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+}
+
+/* Header line separator */
+.top-divider {
+  width: 100%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.05);
+  margin-bottom: 16px;
+}
+
+/* Removed conflicting flex utilities natively handled by Tailwind */
+
+/* Dashboard Grid Layout 
+ * Looks basically like:
+ * [   Header  ]
+ * [   KPIs    ]  [ Right Sidebar ]
+ * [   Chart   ]  [   Widgets     ]
+ * [ Bottom W. ]
+ */
+.dashboard-container {
+  width: 100%;
+  max-width: 1400px;
+  padding: 16px 24px;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  grid-gap: var(--panel-gap);
+  grid-template-areas:
+    "header header"
+    "kpis sidebar"
+    "chart sidebar"
+    "bottom sidebar";
+}
+
+.area-header {
+  grid-area: header;
+}
+
+.area-kpis {
+  grid-area: kpis;
+  display: flex;
+  gap: var(--panel-gap);
+}
+
+.area-chart {
+  grid-area: chart;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+}
+
+.area-sidebar {
+  grid-area: sidebar;
+  display: flex;
+  flex-direction: column;
+  gap: var(--panel-gap);
+}
+
+.area-bottom {
+  grid-area: bottom;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--panel-gap);
+}
+
+/* Typography */
+.text-green {
+  color: var(--bullish);
+}
+
+.text-red {
+  color: var(--bearish);
+}
+
+.text-sm {
+  font-size: 0.85rem;
+}
+
+.text-xs {
+  font-size: 0.75rem;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+/* Specific Component Overrides */
+.card-header {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+}
+
+h2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+/* Custom Animations for Authentication Pages */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shake {
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  20%,
+  60% {
+    transform: translateX(-4px);
+  }
+
+  40%,
+  80% {
+    transform: translateX(4px);
+  }
+}
+
+@keyframes subtleFloat {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0;
+}
+
+.animate-shake {
+  animation: shake 0.4s ease-in-out;
+}
+
+.animate-float {
+  animation: subtleFloat 6s ease-in-out infinite;
+}
+
+.delay-100 {
+  animation-delay: 100ms;
+}
+
+.delay-200 {
+  animation-delay: 200ms;
+}
+
+.delay-300 {
+  animation-delay: 300ms;
+}
+
+.delay-400 {
+  animation-delay: 400ms;
+}
+
+.delay-500 {
+  animation-delay: 500ms;
+}
+
+@keyframes shine {
+  100% {
+    transform: translateX(200%) skew(-15deg);
+  }
+}
